@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-DATASET_PATH = Path("data/news/master_news_dataset.json")
+DATASET_PATH = Path("data/master/master_news_dataset.json")
 
 
 def load_documents():

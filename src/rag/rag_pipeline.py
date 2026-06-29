@@ -1,61 +1,36 @@
-def search_news(query, top_k=5):
+"""
+RAG Pipeline Module
 
-    query_embedding = model.encode([query])
-
-    similarities = cosine_similarity(
-        query_embedding,
-        embeddings
-    )[0]
-
-    top_indices = np.argsort(
-        similarities
-    )[::-1][:top_k]
-
-    results = []
-
-    for idx in top_indices:
-
-        results.append(
-            {
-                "score": float(similarities[idx]),
-                "text": texts[idx]
-            }
-        )
-
-    return results
-
-
-def rag_answer(question):
-
-    query_embedding = model.encode([question])
-
-    similarities = cosine_similarity(
-        query_embedding,
-        embeddings
-    )[0]
-
-    top_indices = np.argsort(
-        similarities
-    )[::-1][:3]
-
-    context = "\n".join(
-        [texts[idx] for idx in top_indices]
-    )
-
-    prompt = f"""
-You are a financial research assistant.
-
-Question:
-{question}
-
-Relevant News:
-{context}
-
-Provide a concise answer based only on the news above.
+Coordinates document retrieval and answer generation
+using the retrieval-augmented generation (RAG) workflow.
 """
 
-    response = model_gemini.generate_content(
-        prompt
+from .retriever import retrieve_documents
+from .llm import generate_answer
+
+
+def rag_answer(question: str, model_gemini) -> str:
+    """
+    Generate an answer for a user's question using RAG.
+
+    Args:
+        question: User's question.
+        model_gemini: Initialized Gemini model.
+
+    Returns:
+        AI-generated answer.
+    """
+
+    documents = retrieve_documents(question, top_k=3)
+
+    context = "\n".join(
+        [doc["text"] for doc in documents]
     )
 
-    return response.text
+    answer = generate_answer(
+        question,
+        context,
+        model_gemini
+    )
+
+    return answer
