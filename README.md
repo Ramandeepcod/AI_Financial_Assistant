@@ -1,22 +1,22 @@
-# 🤖 AI Financial Assistant
+# AI Financial Assistant
 
 A Retrieval-Augmented Generation (RAG) based AI Financial Assistant that answers financial questions using the latest financial news. The application combines semantic search with Google Gemini to generate accurate, context-aware responses.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 📈 Financial news collection pipeline
-- 🧹 Automated data cleaning and validation
-- 🔍 Semantic search using Sentence Transformers
-- 🗂️ FAISS vector database for fast retrieval
-- 🤖 Google Gemini 2.5 Flash for answer generation
-- 🌐 FastAPI backend with Swagger documentation
-- 💬 Ready for Streamlit chat interface
+-  Financial news collection pipeline
+-  Automated data cleaning and validation
+-  Semantic search using Sentence Transformers
+-  FAISS vector database for fast retrieval
+-  Google Gemini 2.5 Flash for answer generation
+-  FastAPI backend with Swagger documentation
+-  Ready for Streamlit chat interface
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
                 Financial News
@@ -50,7 +50,7 @@ A Retrieval-Augmented Generation (RAG) based AI Financial Assistant that answers
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 AI_Financial_Assistant
@@ -81,7 +81,7 @@ AI_Financial_Assistant
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend
 - Python
@@ -106,7 +106,7 @@ AI_Financial_Assistant
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 Clone the repository:
 
@@ -149,7 +149,7 @@ python -m uvicorn src.api.main:app --reload
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
@@ -159,7 +159,7 @@ python -m uvicorn src.api.main:app --reload
 
 ---
 
-## 📌 Example Request
+##  Example Request
 
 ```json
 {
@@ -169,7 +169,7 @@ python -m uvicorn src.api.main:app --reload
 
 ---
 
-## 📌 Future Improvements
+##  Future Improvements
 
 - Streamlit chat interface
 - Docker support
@@ -182,7 +182,7 @@ python -m uvicorn src.api.main:app --reload
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Ramandeep**
 
