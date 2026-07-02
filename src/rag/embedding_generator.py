@@ -11,12 +11,12 @@ EMBEDDING_PATH = Path("data/embeddings/embeddings.npy")
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
-def load_documents():
+def load_documents() -> list:
     with open(DATASET_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def create_texts(documents):
+def create_texts(documents: list) -> list:
     texts = []
 
     for doc in documents:
@@ -29,7 +29,7 @@ def create_texts(documents):
     return texts
 
 
-def generate_embeddings(texts):
+def generate_embeddings(texts: list) -> None:
 
     embeddings = model.encode(
         texts,
@@ -41,7 +41,7 @@ def generate_embeddings(texts):
     print(f"\nSaved embeddings to: {EMBEDDING_PATH}")
 
 
-def main():
+def main() -> None:
 
     documents = load_documents()
 

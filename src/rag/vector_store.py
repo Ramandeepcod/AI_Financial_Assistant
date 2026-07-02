@@ -19,7 +19,7 @@ with open(TEXTS_PATH, "r", encoding="utf-8") as f:
     texts = json.load(f)
 
 
-def search_news(query, top_k=5):
+def search_news(query: str, top_k: int = 5) -> list:
     """
     Search the FAISS index and return the most relevant news.
     """

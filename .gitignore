@@ -25,3 +25,5 @@ logs/
 # ML artifacts
 models/
 data/embeddings/
+# Virtual Environment
+venv_api/
