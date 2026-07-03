@@ -19,6 +19,13 @@ st.set_page_config(
 )
 
 # --------------------------------------------------
+# Session State
+# --------------------------------------------------
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# --------------------------------------------------
 # Header
 # --------------------------------------------------
 
@@ -35,30 +42,47 @@ Google Gemini.
 st.divider()
 
 # --------------------------------------------------
-# User Input
+# Display Chat History
 # --------------------------------------------------
 
-question = st.text_input(
-    "Enter your financial question:",
-    placeholder="Example: Should I invest in Alphabet?"
+for message in st.session_state.messages:
+
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# --------------------------------------------------
+# Chat Input
+# --------------------------------------------------
+
+question = st.chat_input(
+    "Ask a financial question..."
 )
 
-# --------------------------------------------------
-# Ask Button
-# --------------------------------------------------
+if question:
 
-if st.button("Ask AI", use_container_width=True):
+    # Show user message
+    st.session_state.messages.append(
+        {
+            "role": "user",
+            "content": question
+        }
+    )
 
-    if question.strip():
+    with st.chat_message("user"):
+        st.markdown(question)
 
-        with st.spinner("Generating response..."):
+    # Generate AI response
+    with st.chat_message("assistant"):
+
+        with st.spinner("Thinking..."):
 
             answer = ask_ai(question)
 
-        st.subheader("🤖 AI Response")
+            st.markdown(answer)
 
-        st.success(answer)
-
-    else:
-
-        st.warning("Please enter a question.")
+    st.session_state.messages.append(
+        {
+            "role": "assistant",
+            "content": answer
+        }
+    )
