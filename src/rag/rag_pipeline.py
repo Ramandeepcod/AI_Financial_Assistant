@@ -9,7 +9,7 @@ from .retriever import retrieve_documents
 from .llm import generate_answer
 
 
-def rag_answer(question: str) -> str:
+def rag_answer(question: str) -> dict:
     """
     Generate an answer for a user's question using RAG.
 
@@ -17,28 +17,45 @@ def rag_answer(question: str) -> str:
         question: User's question.
 
     Returns:
-        AI-generated answer.
+        Dictionary containing the AI-generated answer
+        and retrieved source documents.
     """
 
     # Retrieve relevant documents
-    documents = retrieve_documents(question, top_k=3)
+    documents = retrieve_documents(
+        query=question,
+        top_k=3
+    )
 
     # Handle empty retrieval
     if not documents:
-        return (
-            "I couldn't find any relevant financial news "
-            "to answer your question."
-        )
 
-    # Build context from retrieved documents
+        return {
+            "answer": (
+                "I couldn't find any relevant financial news "
+                "to answer your question."
+            ),
+            "sources": []
+        }
+
+    # Build context
     context = "\n".join(
         doc["text"] for doc in documents
     )
 
-    # Generate answer using Gemini
+    # Generate answer
     answer = generate_answer(
         question=question,
         context=context
     )
 
-    return answer
+    # Extract source texts
+    sources = [
+        doc["text"]
+        for doc in documents
+    ]
+
+    return {
+        "answer": answer,
+        "sources": sources
+    }

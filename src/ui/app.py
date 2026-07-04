@@ -48,7 +48,27 @@ st.divider()
 for message in st.session_state.messages:
 
     with st.chat_message(message["role"]):
+
         st.markdown(message["content"])
+
+        if (
+            message["role"] == "assistant"
+            and "sources" in message
+            and message["sources"]
+        ):
+
+            st.divider()
+
+            st.markdown("### 📚 Retrieved Sources")
+
+            for i, source in enumerate(
+                message["sources"],
+                start=1
+            ):
+
+                st.markdown(
+                    f"**{i}.** {source}"
+                )
 
 # --------------------------------------------------
 # Chat Input
@@ -76,13 +96,28 @@ if question:
 
         with st.spinner("Thinking..."):
 
-            answer = ask_ai(question)
+            result = ask_ai(question)
+
+            answer = result["answer"]
+            sources = result["sources"]
 
             st.markdown(answer)
+            if sources:
+
+                st.divider()
+
+                st.markdown("### 📚 Retrieved Sources")
+
+                for i, source in enumerate(sources, start=1):
+
+                    st.markdown(
+                        f"**{i}.** {source}"
+                    )
 
     st.session_state.messages.append(
         {
             "role": "assistant",
-            "content": answer
+            "content": answer,
+            "sources": sources
         }
     )

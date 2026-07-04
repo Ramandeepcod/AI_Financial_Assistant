@@ -9,7 +9,7 @@ import requests
 API_URL = "http://127.0.0.1:8000/ask"
 
 
-def ask_ai(question: str) -> str:
+def ask_ai(question: str) -> dict:
     """
     Send a question to the FastAPI backend.
 
@@ -17,7 +17,7 @@ def ask_ai(question: str) -> str:
         question: User's financial question.
 
     Returns:
-        AI-generated answer.
+        Dictionary containing the AI answer and sources.
     """
 
     payload = {
@@ -33,7 +33,11 @@ def ask_ai(question: str) -> str:
 
         response.raise_for_status()
 
-        return response.json()["answer"]
+        return response.json()
 
     except Exception as e:
-        return f"Error: {e}"
+
+        return {
+            "answer": f"Error: {e}",
+            "sources": []
+        }

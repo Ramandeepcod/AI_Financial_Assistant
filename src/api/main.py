@@ -40,19 +40,14 @@ def health():
 def ask_question(request: QuestionRequest):
     """
     Generate an AI answer for a financial question.
-
-    Args:
-        request: User's financial question.
-
-    Returns:
-        QuestionResponse containing the question and AI-generated answer.
     """
 
-    answer = rag_answer(
+    result = rag_answer(
         question=request.question
     )
 
     return QuestionResponse(
         question=request.question,
-        answer=answer
+        answer=result["answer"],
+        sources=result["sources"]
     )
