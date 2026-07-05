@@ -8,6 +8,9 @@ import streamlit as st
 
 from api_client import ask_ai
 from sidebar import render_sidebar
+from components import render_sources
+from styles import load_css
+from suggestions import render_suggestions
 
 # --------------------------------------------------
 # Page Configuration
@@ -18,6 +21,7 @@ st.set_page_config(
     page_icon="🤖",
     layout="wide"
 )
+load_css()
 
 # --------------------------------------------------
 # Session State
@@ -44,6 +48,13 @@ Google Gemini.
 st.divider()
 
 # --------------------------------------------------
+# Suggested Questions
+# --------------------------------------------------
+
+if not st.session_state.messages:
+    render_suggestions()
+
+# --------------------------------------------------
 # Display Chat History
 # --------------------------------------------------
 
@@ -56,21 +67,8 @@ for message in st.session_state.messages:
         if (
             message["role"] == "assistant"
             and "sources" in message
-            and message["sources"]
         ):
-
-            st.divider()
-
-            st.markdown("### 📚 Retrieved Sources")
-
-            for i, source in enumerate(
-                message["sources"],
-                start=1
-            ):
-
-                st.markdown(
-                    f"**{i}.** {source}"
-                )
+            render_sources(message["sources"])
 
 # --------------------------------------------------
 # Chat Input
@@ -104,17 +102,8 @@ if question:
             sources = result["sources"]
 
             st.markdown(answer)
-            if sources:
 
-                st.divider()
-
-                st.markdown("### 📚 Retrieved Sources")
-
-                for i, source in enumerate(sources, start=1):
-
-                    st.markdown(
-                        f"**{i}.** {source}"
-                    )
+            render_sources(sources)
 
     st.session_state.messages.append(
         {
