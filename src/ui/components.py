@@ -15,17 +15,14 @@ def render_sources(sources):
 
     st.divider()
 
-    st.markdown("## 📚 Retrieved Sources")
+    st.subheader("📰 Retrieved News")
 
-    for i, source in enumerate(
-        sources,
-        start=1
-    ):
+    for source in sources:
 
         with st.container(border=True):
 
-            st.markdown(
-                f"**📄 Source {i}**"
-            )
+            st.markdown("**📰 Financial News**")
+
+            st.caption("Retrieved from the vector database")
 
             st.write(source)

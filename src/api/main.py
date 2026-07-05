@@ -8,6 +8,9 @@ from fastapi import FastAPI
 
 from src.api.models import QuestionRequest, QuestionResponse
 from src.rag.rag_pipeline import rag_answer
+from src.services.stats_service import StatsService
+
+stats_service = StatsService()
 
 app = FastAPI(
     title="AI Financial Assistant",
@@ -34,6 +37,15 @@ def health():
     return {
         "status": "healthy"
     }
+
+
+@app.get("/stats")
+def get_statistics():
+    """
+    Return application statistics.
+    """
+
+    return stats_service.get_statistics()
 
 
 @app.post("/ask", response_model=QuestionResponse)

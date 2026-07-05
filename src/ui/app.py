@@ -7,8 +7,8 @@ User interface for the AI Financial Assistant.
 import streamlit as st
 
 from api_client import ask_ai
-from sidebar import render_sidebar
 from components import render_sources
+from sidebar import render_sidebar
 from styles import load_css
 from suggestions import render_suggestions
 
@@ -21,14 +21,20 @@ st.set_page_config(
     page_icon="🤖",
     layout="wide"
 )
+
 load_css()
 
 # --------------------------------------------------
 # Session State
+# --------------------------------------------------
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# --------------------------------------------------
 # Sidebar
+# --------------------------------------------------
+
 render_sidebar()
 
 # --------------------------------------------------
@@ -37,12 +43,10 @@ render_sidebar()
 
 st.title("🤖 AI Financial Assistant")
 
-st.markdown(
-    """
-Ask questions about financial markets using our
-Retrieval-Augmented Generation (RAG) system powered by
-Google Gemini.
-"""
+st.caption(
+    "Ask intelligent financial questions using "
+    "Retrieval-Augmented Generation (RAG), "
+    "FAISS Vector Search and Google Gemini."
 )
 
 st.divider()
@@ -51,11 +55,11 @@ st.divider()
 # Suggested Questions
 # --------------------------------------------------
 
-if not st.session_state.messages:
+if len(st.session_state.messages) == 0:
     render_suggestions()
 
 # --------------------------------------------------
-# Display Chat History
+# Chat History
 # --------------------------------------------------
 
 for message in st.session_state.messages:
@@ -66,21 +70,26 @@ for message in st.session_state.messages:
 
         if (
             message["role"] == "assistant"
-            and "sources" in message
+            and message.get("sources")
         ):
-            render_sources(message["sources"])
+            render_sources(
+                message["sources"]
+            )
 
 # --------------------------------------------------
 # Chat Input
 # --------------------------------------------------
 
 question = st.chat_input(
-    "Ask a financial question..."
+    "Ask anything about financial markets..."
 )
 
 if question:
 
-    # Show user message
+    # -----------------------------
+    # User Message
+    # -----------------------------
+
     st.session_state.messages.append(
         {
             "role": "user",
@@ -91,19 +100,24 @@ if question:
     with st.chat_message("user"):
         st.markdown(question)
 
-    # Generate AI response
+    # -----------------------------
+    # AI Response
+    # -----------------------------
+
     with st.chat_message("assistant"):
 
-        with st.spinner("Thinking..."):
+        with st.spinner(
+            "🔍 Searching financial news..."
+        ):
 
             result = ask_ai(question)
 
             answer = result["answer"]
             sources = result["sources"]
 
-            st.markdown(answer)
+        st.markdown(answer)
 
-            render_sources(sources)
+        render_sources(sources)
 
     st.session_state.messages.append(
         {
