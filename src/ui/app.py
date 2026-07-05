@@ -7,6 +7,7 @@ User interface for the AI Financial Assistant.
 import streamlit as st
 
 from api_client import ask_ai
+from sidebar import render_sidebar
 
 # --------------------------------------------------
 # Page Configuration
@@ -20,10 +21,11 @@ st.set_page_config(
 
 # --------------------------------------------------
 # Session State
-# --------------------------------------------------
-
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
+# Sidebar
+render_sidebar()
 
 # --------------------------------------------------
 # Header
