@@ -4,21 +4,23 @@ API Client
 Handles communication with the FastAPI backend.
 """
 
+import os
+
 import requests
 
-API_URL = "http://127.0.0.1:8000/ask"
-STATS_URL = "http://127.0.0.1:8000/stats"
+# Backend URL
+BASE_URL = os.getenv(
+    "API_BASE_URL",
+    "http://127.0.0.1:8000"
+)
+
+API_URL = f"{BASE_URL}/ask"
+STATS_URL = f"{BASE_URL}/stats"
 
 
 def ask_ai(question: str) -> dict:
     """
     Send a question to the FastAPI backend.
-
-    Args:
-        question: User's financial question.
-
-    Returns:
-        Dictionary containing the AI answer and sources.
     """
 
     payload = {
@@ -26,6 +28,7 @@ def ask_ai(question: str) -> dict:
     }
 
     try:
+
         response = requests.post(
             API_URL,
             json=payload,
@@ -46,10 +49,11 @@ def ask_ai(question: str) -> dict:
 
 def get_statistics():
     """
-    Fetch dashboard statistics from the backend.
+    Fetch dashboard statistics.
     """
 
     try:
+
         response = requests.get(
             STATS_URL,
             timeout=10
