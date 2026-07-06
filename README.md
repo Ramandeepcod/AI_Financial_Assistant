@@ -1,189 +1,258 @@
-# AI Financial Assistant
+# 🤖 AI Financial Assistant
 
-A Retrieval-Augmented Generation (RAG) based AI Financial Assistant that answers financial questions using the latest financial news. The application combines semantic search with Google Gemini to generate accurate, context-aware responses.
+An AI-powered Financial News Assistant built using **Retrieval-Augmented Generation (RAG)**, **FAISS**, **FastAPI**, **Streamlit**, and **Google Gemini**.
 
----
-
-## Features
-
--  Financial news collection pipeline
--  Automated data cleaning and validation
--  Semantic search using Sentence Transformers
--  FAISS vector database for fast retrieval
--  Google Gemini 2.5 Flash for answer generation
--  FastAPI backend with Swagger documentation
--  Ready for Streamlit chat interface
+The application retrieves the most relevant financial news articles from a vector database and generates accurate, context-aware responses using Google's Gemini model.
 
 ---
 
-##  Architecture
+## 📸 Application Preview
 
-```
-                Financial News
-                       │
-                       ▼
-             Data Collection Pipeline
-                       │
-                       ▼
-                Data Cleaning
-                       │
-                       ▼
-            SentenceTransformer
-                       │
-                       ▼
-                 FAISS Index
-                       │
-      User Question     │
-            │           │
-            ▼           │
-        Retriever ◄─────┘
-            │
-            ▼
-      Relevant Documents
-            │
-            ▼
-      Google Gemini 2.5 Flash
-            │
-            ▼
-        AI Generated Answer
+### 🏠 Home
+
+![Home](assets/home.png)
+
+---
+
+### 💬 Chat Interface
+
+![Chat](assets/chat.png)
+
+---
+
+### 📰 Retrieved Sources
+
+![Sources](assets/sources.png)
+
+---
+
+## ✨ Key Features
+
+- 🔍 Retrieval-Augmented Generation (RAG)
+- 🤖 Google Gemini Integration
+- ⚡ FastAPI Backend
+- 🎨 Streamlit Frontend
+- 🧠 FAISS Vector Search
+- 📚 Source Attribution
+- 💬 Conversation History
+- 📊 Application Statistics Dashboard
+- 📰 Financial News Dataset
+- 🏢 Multi-company Financial Analysis
+
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                   +----------------------+
+                   |   Streamlit UI       |
+                   |  (Frontend Client)   |
+                   +----------+-----------+
+                              |
+                              | HTTP Request
+                              v
+                   +----------------------+
+                   |      FastAPI API     |
+                   |   (/ask, /stats)     |
+                   +----------+-----------+
+                              |
+                              |
+                              v
+                   +----------------------+
+                   |     RAG Pipeline      |
+                   +----------+-----------+
+                              |
+          +-------------------+-------------------+
+          |                                       |
+          v                                       v
++----------------------+              +----------------------+
+|   FAISS Vector DB    |              |  Google Gemini LLM   |
+| (Semantic Retrieval) |              |  Answer Generation   |
++----------------------+              +----------------------+
+                              |
+                              v
+                    AI Generated Response
 ```
 
 ---
 
-##  Project Structure
+# 📂 Project Structure
 
 ```
-AI_Financial_Assistant
+AI_Financial_Assistant/
 │
+├── assets/                 # Screenshots for README
+├── configs/                # Configuration files
 ├── data/
-│   ├── raw/
-│   ├── cleaned/
-│   ├── validated/
-│   ├── structured/
-│   ├── master/
-│   └── embeddings/
+│   ├── master/             # Financial news dataset
+│   └── embeddings/         # FAISS index & embeddings
 │
+├── deployment/
+├── models/
+├── notebooks/
 ├── src/
 │   ├── api/
 │   ├── rag/
-│   ├── data_pipeline/
-│   ├── agents/
 │   ├── ui/
-│   └── utils/
+│   ├── services/
+│   ├── agents/
+│   └── data_pipeline/
 │
 ├── tests/
-├── configs/
-├── deployment/
-├── notebooks/
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-##  Tech Stack
+# 🛠️ Tech Stack
 
-### Backend
-- Python
-- FastAPI
-- Uvicorn
+| Category | Technology |
+|----------|------------|
+| Language | Python 3.12 |
+| Backend | FastAPI |
+| Frontend | Streamlit |
+| LLM | Google Gemini 2.5 Flash |
+| Embeddings | all-MiniLM-L6-v2 |
+| Vector Database | FAISS |
+| ML Framework | Sentence Transformers |
+| Data Processing | NumPy, JSON |
 
-### AI / Machine Learning
-- Google Gemini 2.5 Flash
-- Sentence Transformers
-- FAISS
-- NumPy
-- Scikit-learn
-
-### Data Processing
-- Pandas
-- Feedparser
-- Requests
-
-### Version Control
-- Git
-- GitHub
 
 ---
 
-##  Installation
+# ⚙️ Installation
 
-Clone the repository:
+## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Ramandeepcod/AI_Financial_Assistant.git
+ https://github.com/Ramandeepcod/AI_Financial_Assistant.git
+
 cd AI_Financial_Assistant
 ```
 
-Create a virtual environment:
+---
+
+## 2. Create a Virtual Environment
 
 ```bash
-python -m venv venv_api
+python -m venv venv
+
+source venv/bin/activate      # Linux / macOS
+
+venv\Scripts\activate         # Windows
 ```
 
-Activate it:
+---
 
-### Linux
-
-```bash
-source venv_api/bin/activate
-```
-
-Install dependencies:
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file:
+---
 
-```text
-GEMINI_API_KEY=YOUR_API_KEY
+## 4. Configure Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 ```
 
-Run the API:
+---
+
+## 5. Start the FastAPI Backend
 
 ```bash
 python -m uvicorn src.api.main:app --reload
 ```
 
----
+Backend:
 
-##  API Endpoints
+```
+http://localhost:8000
+```
 
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/` | Welcome endpoint |
-| GET | `/health` | Health check |
-| POST | `/ask` | Ask a financial question |
+Swagger API Documentation:
 
----
-
-##  Example Request
-
-```json
-{
-    "question": "Should I invest in Alphabet?"
-}
+```
+http://localhost:8000/docs
 ```
 
 ---
 
-##  Future Improvements
+## 6. Start the Streamlit Frontend
 
-- Streamlit chat interface
-- Docker support
-- Authentication
-- Conversation history
-- Source citation display
-- Deployment on Render/Railway
-- Unit testing
-- CI/CD pipeline
+Open another terminal.
+
+```bash
+streamlit run src/ui/app.py
+```
+
+Application:
+
+```
+http://localhost:8501
+```
 
 ---
 
-##  Author
+# 💬 Example Questions
+
+- Latest Tesla news
+- Should I invest in Apple?
+- What are the best banking stocks?
+- Latest Nvidia news
+- Compare Apple and Microsoft *(limited by retrieved context in v1.0)*
+
+---
+
+# 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| POST | `/ask` | Ask financial questions |
+| GET | `/stats` | Retrieve application statistics |
+
+---
+
+# 🚀 Future Improvements
+
+- Metadata-aware FAISS retrieval
+- Improved comparison queries
+- Hybrid semantic + keyword search
+- Live stock market data integration
+- Financial charts and visualizations
+- User authentication
+- Watchlist management
+- Docker support
+- CI/CD with GitHub Actions
+- Migration to the new Google GenAI SDK
+
+---
+
+# 👨‍💻 Author
 
 **Ramandeep**
 
-GitHub: https://github.com/Ramandeepcod
+# 👨‍💻 Author
+
+## Ramandeep
+
+B.Tech in Computer Science
+
+Passionate about Artificial Intelligence, Machine Learning, Retrieval-Augmented Generation (RAG), Large Language Models (LLMs), FastAPI and Data Engineering.
+
+### Connect with me
+
+- GitHub: https://github.com/Ramandeepcod
+- LinkedIn: https://www.linkedin.com/in/ramandeep18/
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
