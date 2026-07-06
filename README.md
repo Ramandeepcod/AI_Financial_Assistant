@@ -1,4 +1,4 @@
-# 🤖 AI Financial Assistant
+#  AI Financial Assistant
 
 An AI-powered Financial News Assistant built using **Retrieval-Augmented Generation (RAG)**, **FAISS**, **FastAPI**, **Streamlit**, and **Google Gemini**.
 
@@ -8,19 +8,19 @@ The application retrieves the most relevant financial news articles from a vecto
 
 ## 📸 Application Preview
 
-### 🏠 Home
+###  Home
 
 ![Home](assets/home.png)
 
 ---
 
-### 💬 Chat Interface
+###  Chat Interface
 
 ![Chat](assets/chat.png)
 
 ---
 
-### 📰 Retrieved Sources
+###  Retrieved Sources
 
 ![Sources](assets/sources.png)
 
@@ -28,21 +28,21 @@ The application retrieves the most relevant financial news articles from a vecto
 
 ## ✨ Key Features
 
-- 🔍 Retrieval-Augmented Generation (RAG)
-- 🤖 Google Gemini Integration
-- ⚡ FastAPI Backend
-- 🎨 Streamlit Frontend
-- 🧠 FAISS Vector Search
-- 📚 Source Attribution
-- 💬 Conversation History
-- 📊 Application Statistics Dashboard
-- 📰 Financial News Dataset
-- 🏢 Multi-company Financial Analysis
+-  Retrieval-Augmented Generation (RAG)
+-  Google Gemini Integration
+-  FastAPI Backend
+-  Streamlit Frontend
+-  FAISS Vector Search
+-  Source Attribution
+-  Conversation History
+-  Application Statistics Dashboard
+-  Financial News Dataset
+-  Multi-company Financial Analysis
 
 
 ---
 
-# 🏗️ System Architecture
+#  System Architecture
 
 ```text
                    +----------------------+
@@ -77,7 +77,7 @@ The application retrieves the most relevant financial news articles from a vecto
 
 ---
 
-# 📂 Project Structure
+#  Project Structure
 
 ```
 AI_Financial_Assistant/
@@ -106,7 +106,7 @@ AI_Financial_Assistant/
 
 ---
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 | Category | Technology |
 |----------|------------|
@@ -122,7 +122,7 @@ AI_Financial_Assistant/
 
 ---
 
-# ⚙️ Installation
+#  Installation
 
 ## 1. Clone the Repository
 
@@ -200,7 +200,7 @@ http://localhost:8501
 
 ---
 
-# 💬 Example Questions
+#  Example Questions
 
 - Latest Tesla news
 - Should I invest in Apple?
@@ -210,7 +210,7 @@ http://localhost:8501
 
 ---
 
-# 🔌 API Endpoints
+#  API Endpoints
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
@@ -219,7 +219,7 @@ http://localhost:8501
 
 ---
 
-# 🚀 Future Improvements
+#  Future Improvements
 
 - Metadata-aware FAISS retrieval
 - Improved comparison queries
@@ -234,11 +234,8 @@ http://localhost:8501
 
 ---
 
-# 👨‍💻 Author
 
-**Ramandeep**
-
-# 👨‍💻 Author
+#  Author
 
 ## Ramandeep
 
@@ -253,6 +250,6 @@ Passionate about Artificial Intelligence, Machine Learning, Retrieval-Augmented 
 
 ---
 
-## ⭐ Support
+##  Support
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
