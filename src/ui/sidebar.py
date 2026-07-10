@@ -4,7 +4,7 @@ Sidebar Components
 
 import streamlit as st
 
-from api_client import get_statistics
+from src.ui.api_client import get_statistics
 
 
 def render_sidebar():

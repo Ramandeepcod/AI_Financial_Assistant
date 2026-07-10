@@ -6,11 +6,11 @@ User interface for the AI Financial Assistant.
 
 import streamlit as st
 
-from api_client import ask_ai
-from components import render_sources
-from sidebar import render_sidebar
-from styles import load_css
-from suggestions import render_suggestions
+from src.ui.api_client import ask_ai
+from src.ui.sidebar import render_sidebar
+from src.ui.components import render_sources
+from src.ui.styles import load_css
+from src.ui.suggestions import render_suggestions
 
 # --------------------------------------------------
 # Page Configuration
